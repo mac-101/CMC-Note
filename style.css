@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.home {
+    max-width: 1000px;
+    width: 100%;
+    justify-self: center;
+    display: block;
+}
+
+#nav {
+    width: 100%;
+}
+
+#nav h1 {
+    margin-bottom: 20px;
+    border-radius: 20px;
+    font-size: 50px;
+    box-shadow: 0 1px 5px black;
+    padding: 10px;
+}
+
+
+
+#cancel {
+    display: flex;
+    float: right;
+    font-family: arial;
+    font-size: 20px;
+    cursor: pointer;
+    width: 30px;
+    justify-content: center;
+    color: red;
+}
+
+#creating-note-page {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 20px;
+    max-width: 700px;
+    width: 90%;
+    display: none;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+#creating-note-page h1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#error{
+    font-size: 15px;
+    color: red;
+    justify-self: center;
+}
+#title {
+    border: 0px;
+    font-size: 30px;
+    padding: 10px 20px;
+    outline: none;
+}
+
+#title:active {
+    border: none;
+}
+
+#content {
+    outline: none;
+    resize: none;
+    border: 0px;
+    font-size: 15px;
+    padding: 10px 20px;
+    height: 300px;
+}
+
+#save {
+    width: fit-content;
+    padding: 5px 20px;
+    border-radius: 20px;
+}
+
+#create-note {
+    border-radius: 20px;
+    padding: 20px;
+    position: fixed;
+    right: 50px;
+    bottom: 0;
+}
+
+#list{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#list div {
+    cursor: pointer;
+    background-color: red;
+    max-width: 900px;
+    width: 100%;
+    justify-self: center;
+    background: white;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+#list div h1,
+#list div p {
+    padding: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: block;
+}
