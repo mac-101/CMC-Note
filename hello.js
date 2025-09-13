@@ -17,6 +17,7 @@ document.getElementById("cancel").addEventListener('click', function () {
 
 createNote.onclick = function () {
     creatingNote.style.display = "flex";
+    title.focus()
 
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
@@ -38,23 +39,20 @@ save.addEventListener('click', function () {
     const noteContent = document.createElement("p");
     noteContent.textContent = content.value;
 
-
     const postDate = document.createElement("p");
     postDate.textContent = `${day.innerHTML}/${month.innerHTML}/${year.innerHTML}`;
 
-
-
-
-    if (title.value.length === 0) {
-        document.getElementById("error").innerHTML = "No title"
-        return;
-    } else {
-        document.getElementById("error").innerHTML = " "
-    }
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.className = "delete-note";
+    deleteBtn.onclick = function () {
+        div.remove();
+    };
 
     div.appendChild(heading);
     div.appendChild(noteContent);
-    div.appendChild(postDate)
+    div.appendChild(postDate);
+    div.appendChild(deleteBtn);
 
     list.insertBefore(div, list.firstChild);
 
@@ -64,3 +62,19 @@ save.addEventListener('click', function () {
     content.value = ""
 
 });
+
+document.getElementById("about").addEventListener('click', function () {
+    document.getElementById("about-div").style.display = "block";
+    document.getElementById("name").innerHTML = "About"
+    createNote.style.display = "none";
+    document.querySelector("body").style.background = "#8080800e";
+    list.style.display = "none";
+
+    document.getElementById("aboutCancel").addEventListener('click', function () {
+        document.getElementById("about-div").style.display = "none";
+        document.getElementById("name").innerHTML = "My Note"
+        createNote.style.display = "block";
+        document.querySelector("body").style.background = "white";
+        list.style.display = "block";
+    })
+})

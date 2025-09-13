@@ -7,6 +7,10 @@
     <title>Task App</title>
 
     <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
+        integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 
@@ -14,9 +18,10 @@
 
     <div class="home">
         <div id="nav">
-            <h1>My Note</h1>
-            <span style="position: fixed; top: 50px; right: 50px;">CMC</span>
+            <h1 id="name">My Note</h1>
+            <span id="about"> <span class="info">About</span>CMC</span>
         </div>
+
 
         <div id="creating-note-page">
             <h1>New note <span id="error"></span> <button id="cancel">X</button></h1>
@@ -32,12 +37,20 @@
         <div id="list">
 
         </div>
-        
+
     </div>
 
-    <p id="hello"></p>
+    <div id="about-div">
+        <button id="aboutCancel">x</button>
+        <p id="about-content">Welcome to my note-taking app — a simple space designed to help you capture thoughts,
+            ideas, and reminders without the clutter. Every part of this experience, from the layout to the way notes
+            are created and displayed, was built by me with intention and care. I wanted something lightweight, fast,
+            and intuitive — so I built it myself. Whether you're jotting down a quick idea or organizing your day, I
+            hope this tool makes it easier. Thanks for using something I made.
+        </p>
+    </div>
 
-    <button id="create-note">Create Task</button>
+    <button id="create-note"><i class="ri-pencil-fill"></i></button>
 
     <script src="hello.js"></script>
 </body>
