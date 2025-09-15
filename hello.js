@@ -28,40 +28,54 @@ createNote.onclick = function () {
 }
 
 
-save.addEventListener('click', function () {
+save.addEventListener("click", function () {
+  const div = document.createElement("div");
+
+  const heading = document.createElement("h1");
+  heading.textContent = title.value;
+
+  const noteContent = document.createElement("p");
+  noteContent.textContent = content.value;
+
+  const postDate = document.createElement("p");
+  postDate.textContent = `${day.innerHTML}/${month.innerHTML}/${year.innerHTML}`;
+
+  // delete icon button
+  const deleteBtn = document.createElement("button");
+  deleteBtn.innerHTML = '<i class="ri-more-2-line"></i>';
+  deleteBtn.className = "deleteBtn";
+    deleteBtn.onclick=deleteFunc;
 
 
-    const div = document.createElement("div");
+  //delte and date line
 
-    const heading = document.createElement("h1");
-    heading.textContent = title.value;
+  const end = document.createElement("span");
+  end.className="end";
 
-    const noteContent = document.createElement("p");
-    noteContent.textContent = content.value;
+    //delete function
 
-    const postDate = document.createElement("p");
-    postDate.textContent = `${day.innerHTML}/${month.innerHTML}/${year.innerHTML}`;
+    function deleteFunc() {
+        div.remove()
+    }
 
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    deleteBtn.className = "delete-note";
-    deleteBtn.onclick = function () {
-        div.remove();
-    };
 
-    div.appendChild(heading);
-    div.appendChild(noteContent);
-    div.appendChild(postDate);
-    div.appendChild(deleteBtn);
+  // Assemble note
+  end.appendChild(postDate);
+  end.appendChild(deleteBtn);
+  div.appendChild(heading);
+  div.appendChild(noteContent);
+  div.appendChild(end);
 
-    list.insertBefore(div, list.firstChild);
+  list.insertBefore(div, list.firstChild);
 
-    creatingNote.style.display = "none";
-
-    title.value = ""
-    content.value = ""
-
+  creatingNote.style.display = "none";
+  title.value = "";
+  content.value = "";
 });
+
+
+
+//about section when cmc is clicked
 
 document.getElementById("about").addEventListener('click', function () {
     document.getElementById("about-div").style.display = "block";
