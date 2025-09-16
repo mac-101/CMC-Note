@@ -29,19 +29,34 @@ createNote.onclick = () => {
 
 // 💾 Save note
 save.onclick = () => {
-  // Create note container and its elements
+  const note = {
+    title: title.value,
+    content: content.value,
+    date: `${day.innerHTML}/${month.innerHTML}/${year.innerHTML}`
+  };
+  renderNote(note);
+  saveList();
+
+  creatingNote.style.display = "none";
+  title.value = "";
+  content.value = "";
+};
+
+// 🧱 Render a note
+function renderNote(note) {
   const div = document.createElement("div");
   const heading = document.createElement("h1");
-  heading.textContent = title.value;
+  heading.textContent = note.title;
   const noteContent = document.createElement("p");
-  noteContent.textContent = content.value;
+  noteContent.textContent = note.content;
   const postDate = document.createElement("p");
-  postDate.textContent = `${day.innerHTML}/${month.innerHTML}/${year.innerHTML}`;
+  postDate.textContent = note.date;
 
-  // Collapse helper: undo “expanded” state and show all notes
+  const end = document.createElement("span");
+  end.className = "end";
+
   const collapseNote = () => {
-    document.querySelectorAll("#list > div")
-      .forEach(n => n.classList.remove("hidden-note"));
+    document.querySelectorAll("#list > div").forEach(n => n.classList.remove("hidden-note"));
     div.classList.remove("expanded-note");
     heading.classList.remove("p-expanded");
     noteContent.style.whiteSpace = "nowrap";
@@ -50,11 +65,9 @@ save.onclick = () => {
     div.appendChild(end);
     $("name").style.display = "block";
     $("home").style.paddingTop = "80px";
-    createNote.style.display = "block"; // show it again
-
+    createNote.style.display = "block";
   };
 
-  // Delete button: collapse if expanded, then remove the note
   const deleteBtn = document.createElement("button");
   deleteBtn.innerHTML = '<i class="ri-delete-bin-5-line"></i>';
   deleteBtn.className = "deleteBtn";
@@ -64,38 +77,22 @@ save.onclick = () => {
       collapseNote();
     }
     div.remove();
+    saveList(); // update localStorage after deletion
   };
 
-  // “End” bar with date and delete icon
-  const end = document.createElement("span");
-  end.className = "end";
   end.append(postDate, deleteBtn);
-
-  // Assemble and prepend the new note
   div.append(heading, noteContent, end);
   list.prepend(div);
 
-  // Reset the create-note form
-  creatingNote.style.display = "none";
-  title.value = "";
-  content.value = "";
-
-  // Expand-note handler
   div.onclick = () => {
-    // Hide all other notes
-
-    createNote.style.display = "none"; // hide create button
-
-    document.querySelectorAll("#list > div")
-      .forEach(note => {
-        if (note !== div) note.classList.add("hidden-note");
-      });
+    createNote.style.display = "none";
+    document.querySelectorAll("#list > div").forEach(n => {
+      if (n !== div) n.classList.add("hidden-note");
+    });
 
     $("name").style.display = "none";
     $("home").style.paddingTop = "0px";
-    
 
-    // Add back button if missing
     if (!end.querySelector(".back")) {
       const back = document.createElement("button");
       back.innerHTML = '<i class="ri-arrow-left-line"></i>';
@@ -108,14 +105,30 @@ save.onclick = () => {
       end.style.gap = "30px";
     }
 
-    // Apply expanded styles
     div.classList.add("expanded-note");
     heading.classList.add("p-expanded");
     noteContent.style.whiteSpace = "pre-wrap";
     div.prepend(end);
   };
-};
+}
 
+// 💾 Save all notes to localStorage
+function saveList() {
+  const notes = [];
+  list.querySelectorAll("#list > div").forEach(note => {
+    const title = note.querySelector("h1")?.textContent.trim() || "";
+    const content = note.querySelector("p")?.textContent.trim() || "";
+    const date = note.querySelector(".end p")?.textContent.trim() || "";
+    notes.push({ title, content, date });
+  });
+  localStorage.setItem("tasks", JSON.stringify(notes));
+}
+
+// 📥 Load notes from localStorage
+function loadList() {
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.forEach(renderNote);
+}
 
 // 📖 About section
 $("about").onclick = () => {
@@ -133,3 +146,6 @@ $("about").onclick = () => {
     list.style.display = "block";
   };
 };
+
+// 🚀 Load notes on startup
+loadList();
