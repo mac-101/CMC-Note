@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-.home {
+#home {
     max-width: 1000px;
     width: 100%;
     justify-self: center;
@@ -151,46 +151,67 @@
 }
 
 #list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 10px;
 }
 
 #list div {
-  cursor: pointer;
-  background-color: white;
-  max-width: 900px;
-  width: 100%;
-  justify-self: center;
-  border-radius: 20px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-  position: relative;
-  margin-bottom: 20px;
-  padding: 10px;
+    cursor: pointer;
+    background-color: white;
+    max-width: 900px;
+    width: 100%;
+    justify-self: center;
+    border-radius: 20px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    position: relative;
+    margin-bottom: 20px;
+    padding: 10px;
 }
 
 #list div h1,
 #list div p {
-  padding: 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  display: block;
+    padding: 5px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: block;
 }
 
 .deleteBtn {
-  float: right;
-  background-color: #fff;
-  border: none;
-  font-size: 20px;
-  padding: 0 5px;
-  cursor: pointer;
-  position: relative;
-  z-index: 10;
+    float: right;
+    background-color: #fff;
+    border: none;
+    font-size: 20px;
+    padding: 0 5px;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
 }
-.end{
+
+.end {
     display: flex;
     justify-content: space-between;
+}
+.back {
+    border: none;
+    background-color: white;
+    font-size: 20px;
+}
+
+/* note in large screen */
+
+.expanded-note {
+  position: static; /* or just remove this line entirely */
+  width: 100%;
+  min-height: 100lvh;
+  background: white;
+  z-index: 999;
+  padding: 2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.hidden-note {
+  display: none;
 }
